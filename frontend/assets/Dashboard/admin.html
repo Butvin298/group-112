@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Админ-панель</title></head>
+<body>
+  <h1>Админ-панель</h1>
+  <a href="/logout">Выйти</a>
+
+  <h2>Заявки</h2>
+  <ul>
+    {% for order in orders %}
+    <li>
+      {{ order.service }} от {{ order.user.login }} - {{ order.status }}
+      <form action="/assign-order/{{ order.id }}" method="post" style="display:inline;">
+        <select name="admin_id">
+          {% for admin in users if admin.role in ['admin', 'superadmin'] %}
+          <option value="{{ admin.id }}">{{ admin.login }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">Назначить</button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

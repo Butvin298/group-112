@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Личный кабинет | group-112</title>
+  <link rel="stylesheet" href="/assets/Dashboard/assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Личный кабинет</h1>
+    <p>Привет, <strong>{{ user.login }}</strong>!</p>
+    <p>Баланс: <strong>{{ user.balance }} ₽</strong></p>
+
+    <h2>Новая заявка</h2>
+    <form action="/new-order" method="post">
+      <input name="service" placeholder="Услуга" required />
+      <textarea name="description" placeholder="Описание" required></textarea>
+      <input name="cost" type="number" step="0.01" placeholder="Стоимость" required />
+      <button type="submit">Создать</button>
+    </form>
+
+    <h2>Заявки</h2>
+    <ul>
+      {% for order in orders %}
+      <li><strong>{{ order.service }}</strong> — {{ order.status }} — {{ order.cost }} ₽</li>
+      {% endfor %}
+    </ul>
+
+    <a href="/logout">Выйти</a>
+  </div>
+  <script src="/assets/Dashboard/js/dashboard.js"></script>
+</body>
+</html>

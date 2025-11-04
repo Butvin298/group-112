@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8003:8003"
+    volumes:
+      - .:/app
+      - ./database.db:/app/database.db
+      - ../frontend:/app/frontend
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    command: python app.py
+    restart: unless-stopped
+    networks:
+      - group112-net
+
+networks:
+  group112-net:
+    driver: bridge
+    name: group112-net

@@ -1,0 +1,14 @@
+services:
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "3003:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - group112-net
+
+networks:
+  group112-net:
+    external: true
